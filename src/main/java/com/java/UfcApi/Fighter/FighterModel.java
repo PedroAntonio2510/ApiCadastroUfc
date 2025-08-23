@@ -35,13 +35,13 @@ public class FighterModel {
     @Column(name = "weightDivision", nullable = false)
     private String weightDivision;
 
-    @Column(name = "numberVictory", nullable = true)
+    @Column(name = "numberVictory")
     private int numberVictory;
 
-    @Column(name = "numberLose", nullable = true)
+    @Column(name = "numberLose")
     private int numberLose;
 
-    @Column(name = "numberDraw", nullable = true)
+    @Column(name = "numberDraw")
     private int numberDraw;
 
     public Long getId() {

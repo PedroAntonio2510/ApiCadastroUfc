@@ -19,4 +19,17 @@ public class FighterMapper {
         return fighterModel;
     }
 
+    public FighterDTO map(FighterModel fighterModel) {
+        return new FighterDTO(
+                fighterModel.getName(),
+                fighterModel.getNickname(),
+                fighterModel.getWeight(),
+                fighterModel.getHeight(),
+                fighterModel.getWeightDivision(),
+                fighterModel.getNumberVictory(),
+                fighterModel.getNumberLose(),
+                fighterModel.getNumberDraw()
+        );
+    }
+
 }
