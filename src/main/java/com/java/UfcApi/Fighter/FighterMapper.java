@@ -8,6 +8,7 @@ public class FighterMapper {
     public FighterModel map(FighterDTO fighterDTO) {
         FighterModel fighterModel = new FighterModel();
         fighterModel.setName(fighterDTO.name());
+        fighterModel.setCpf(fighterDTO.cpf());
         fighterModel.setNickname(fighterDTO.nickname());
         fighterModel.setWeight(fighterDTO.weight());
         fighterModel.setHeight(fighterDTO.height());
@@ -22,6 +23,7 @@ public class FighterMapper {
     public FighterDTO map(FighterModel fighterModel) {
         return new FighterDTO(
                 fighterModel.getName(),
+                fighterModel.getCpf(),
                 fighterModel.getNickname(),
                 fighterModel.getWeight(),
                 fighterModel.getHeight(),
