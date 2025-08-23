@@ -35,17 +35,13 @@ public class FighterModel {
     @Column(name = "weightDivision", nullable = false)
     private String weightDivision;
 
-    @OneToMany
-    @JoinColumn(name = "fight_id")
-    private List<FightModel> fight;
-
-    @Column(name = "numberVictory", nullable = false)
+    @Column(name = "numberVictory", nullable = true)
     private int numberVictory;
 
-    @Column(name = "numberLose", nullable = false)
+    @Column(name = "numberLose", nullable = true)
     private int numberLose;
 
-    @Column(name = "numberDraw", nullable = false)
+    @Column(name = "numberDraw", nullable = true)
     private int numberDraw;
 
     public Long getId() {
@@ -62,6 +58,14 @@ public class FighterModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getNickname() {
@@ -94,14 +98,6 @@ public class FighterModel {
 
     public void setWeightDivision(String weightDivision) {
         this.weightDivision = weightDivision;
-    }
-
-    public List<FightModel> getFight() {
-        return fight;
-    }
-
-    public void setFight(List<FightModel> fight) {
-        this.fight = fight;
     }
 
     public int getNumberVictory() {

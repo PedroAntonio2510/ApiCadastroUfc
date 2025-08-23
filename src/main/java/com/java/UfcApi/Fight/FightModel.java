@@ -21,11 +21,11 @@ public class FightModel {
     private EventModel event;
 
     @ManyToOne(fetch = FetchType.LAZY) // Muitas lutas podem ter o mesmo lutador 1
-    @JoinColumn(name = "fighter1_id", nullable = false) // Define a coluna da chave estrangeira
+    @JoinColumn(name = "fighterRed_id", nullable = false) // Define a coluna da chave estrangeira
     private FighterModel fighterRedCorner;
 
     @ManyToOne(fetch = FetchType.LAZY) // Muitas lutas podem ter o mesmo lutador 2
-    @JoinColumn(name = "fighter2_id", nullable = false)
+    @JoinColumn(name = "fighterBlue_id", nullable = false)
     private FighterModel fighterBlueCorner;
 
     @ManyToOne(fetch = FetchType.LAZY)
