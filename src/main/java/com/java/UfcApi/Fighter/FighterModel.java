@@ -20,6 +20,9 @@ public class FighterModel {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(nullable = false, unique = true)
+    private String cpf;
+
     @Column(name = "nickname", nullable = false)
     private String nickname;
 

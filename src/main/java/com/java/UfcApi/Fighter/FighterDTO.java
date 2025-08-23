@@ -1,4 +1,15 @@
 package com.java.UfcApi.Fighter;
 
-public record FighterDTO() {
+import java.util.List;
+
+public record FighterDTO(
+        String name,
+        String nickname,
+        Double weight,
+        Double height,
+        String weightDivision,
+        int numberVictory,
+        int numberLose,
+        int numberDraw
+) {
 }

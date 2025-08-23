@@ -20,16 +20,16 @@ public class FightModel {
     @JoinColumn(name = "event_id")
     private EventModel event;
 
-    @ManyToOne
-    @JoinColumn(name = "fighter_red_id")
+    @ManyToOne(fetch = FetchType.LAZY) // Muitas lutas podem ter o mesmo lutador 1
+    @JoinColumn(name = "fighter1_id", nullable = false) // Define a coluna da chave estrangeira
     private FighterModel fighterRedCorner;
 
-    @ManyToOne
-    @JoinColumn(name = "fighter_blue_id")
+    @ManyToOne(fetch = FetchType.LAZY) // Muitas lutas podem ter o mesmo lutador 2
+    @JoinColumn(name = "fighter2_id", nullable = false)
     private FighterModel fighterBlueCorner;
 
-    @ManyToOne
-    @JoinColumn(name = "fighter_winner_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "winner_id", nullable = true) // Vencedor pode ser nulo (empate/no contest)
     private FighterModel fighterWinner;
 
     @Column(name = "methodWin", nullable = false)
