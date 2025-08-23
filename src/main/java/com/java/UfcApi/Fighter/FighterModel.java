@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tb_fighter")
 @AllArgsConstructor
@@ -15,34 +17,34 @@ public class FighterModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "nickname")
+    @Column(name = "nickname", nullable = false)
     private String nickname;
 
-    @Column(name = "weight")
+    @Column(name = "weight", nullable = false)
     private Double weight;
 
-    @Column(name = "height")
+    @Column(name = "height", nullable = false)
     private Double height;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "category")
+    @Column(name = "category", nullable = false)
     private WEIGHT_DIVISION WEIGHTDIVISION;
 
     @OneToMany
     @JoinColumn(name = "fight_id")
-    private FightModel fight;
+    private List<FightModel> fight;
 
-    @Column(name = "victory")
-    private int victory;
+    @Column(name = "numberVictory", nullable = false)
+    private int numberVictory;
 
-    @Column(name = "lose")
-    private int lose;
+    @Column(name = "numberLose", nullable = false)
+    private int numberLose;
 
-    @Column(name = "draw")
-    private int draw;
+    @Column(name = "numberDraw", nullable = false)
+    private int numberDraw;
 
     public Long getId() {
         return id;
@@ -92,27 +94,35 @@ public class FighterModel {
         this.WEIGHTDIVISION = WEIGHTDIVISION;
     }
 
-    public int getVictory() {
-        return victory;
+    public List<FightModel> getFight() {
+        return fight;
     }
 
-    public void setVictory(int victory) {
-        this.victory = victory;
+    public void setFight(List<FightModel> fight) {
+        this.fight = fight;
     }
 
-    public int getLose() {
-        return lose;
+    public int getNumberVictory() {
+        return numberVictory;
     }
 
-    public void setLose(int lose) {
-        this.lose = lose;
+    public void setNumberVictory(int numberVictory) {
+        this.numberVictory = numberVictory;
     }
 
-    public int getDraw() {
-        return draw;
+    public int getNumberLose() {
+        return numberLose;
     }
 
-    public void setDraw(int draw) {
-        this.draw = draw;
+    public void setNumberLose(int numberLose) {
+        this.numberLose = numberLose;
+    }
+
+    public int getNumberDraw() {
+        return numberDraw;
+    }
+
+    public void setNumberDraw(int numberDraw) {
+        this.numberDraw = numberDraw;
     }
 }
