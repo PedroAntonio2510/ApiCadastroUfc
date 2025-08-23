@@ -4,6 +4,7 @@ import java.util.List;
 
 public record FighterDTO(
         String name,
+        String cpf, 
         String nickname,
         Double weight,
         Double height,
