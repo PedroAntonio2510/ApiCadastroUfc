@@ -29,9 +29,8 @@ public class FighterModel {
     @Column(name = "height", nullable = false)
     private Double height;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "category", nullable = false)
-    private WEIGHT_DIVISION WEIGHTDIVISION;
+    @Column(name = "weightDivision", nullable = false)
+    private String weightDivision;
 
     @OneToMany
     @JoinColumn(name = "fight_id")
@@ -86,12 +85,12 @@ public class FighterModel {
         this.height = height;
     }
 
-    public WEIGHT_DIVISION getWEIGHTDIVISION() {
-        return WEIGHTDIVISION;
+    public String getWeightDivision() {
+        return weightDivision;
     }
 
-    public void setWEIGHTDIVISION(WEIGHT_DIVISION WEIGHTDIVISION) {
-        this.WEIGHTDIVISION = WEIGHTDIVISION;
+    public void setWeightDivision(String weightDivision) {
+        this.weightDivision = weightDivision;
     }
 
     public List<FightModel> getFight() {

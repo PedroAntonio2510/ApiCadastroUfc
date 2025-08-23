@@ -32,8 +32,8 @@ public class FightModel {
     @JoinColumn(name = "fighter_winner_id")
     private FighterModel fighterWinner;
 
-    @Enumerated(EnumType.STRING)
-    private METHOD_WIN methodWin;
+    @Column(name = "methodWin", nullable = false)
+    private String methodWin;
 
     @Column(name = "roundFinal")
     private int roundFinal;
@@ -81,11 +81,11 @@ public class FightModel {
         this.fighterWinner = fighterWinner;
     }
 
-    public METHOD_WIN getMethodWin() {
+    public String getMethodWin() {
         return methodWin;
     }
 
-    public void setMethodWin(METHOD_WIN methodWin) {
+    public void setMethodWin(String methodWin) {
         this.methodWin = methodWin;
     }
 

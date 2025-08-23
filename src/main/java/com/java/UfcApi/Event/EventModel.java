@@ -21,8 +21,8 @@ public class EventModel {
 
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    private EVENT_TYPE eventType;
+    @Column(name = "evenType", nullable = false)
+    private String eventType;
 
     @OneToMany(mappedBy = "event")
     @JsonIgnore
