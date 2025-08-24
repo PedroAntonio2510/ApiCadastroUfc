@@ -1,5 +1,6 @@
 package com.java.UfcApi.Fighter;
 
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +33,19 @@ public class FighterController {
     public ResponseEntity<FighterDTO> listById(@PathVariable Long id) {
         FighterDTO figherId = fighterService.listById(id);
         return ResponseEntity.ok(figherId);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@PathVariable Long id,
+                                         @RequestBody FighterDTO fighterDTO) {
+        fighterService.update(id, fighterDTO);
+        return ResponseEntity.status(HttpStatus.OK).body("Fighter updated sucessfully");
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        fighterService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
