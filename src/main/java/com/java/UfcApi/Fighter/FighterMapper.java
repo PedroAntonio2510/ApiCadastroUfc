@@ -6,6 +6,9 @@ import org.springframework.stereotype.Component;
 public class FighterMapper {
 
     public FighterModel map(FighterDTO fighterDTO) {
+        if (fighterDTO == null) {
+            return null;
+        }
         FighterModel fighterModel = new FighterModel();
         fighterModel.setName(fighterDTO.name());
         fighterModel.setCpf(fighterDTO.cpf());
@@ -21,6 +24,9 @@ public class FighterMapper {
     }
 
     public FighterDTO map(FighterModel fighterModel) {
+        if (fighterModel == null) {
+            return null;
+        }
         return new FighterDTO(
                 fighterModel.getName(),
                 fighterModel.getCpf(),

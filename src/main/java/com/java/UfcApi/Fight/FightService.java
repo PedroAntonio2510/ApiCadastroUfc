@@ -1,59 +1,78 @@
 package com.java.UfcApi.Fight;
 
+import com.java.UfcApi.Event.EventModel;
+import com.java.UfcApi.Event.EventRepository;
+import com.java.UfcApi.Fighter.FighterModel;
+import com.java.UfcApi.Fighter.FighterRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class FightService {
 
-    private final FightRepository repository;
+    private final FightRepository fightRepository;
+    private final EventRepository eventRepository;
+    private final FighterRepository fighterRepository;
     private final FightMapper mapper;
 
-    public FightService(FightRepository repository, FightMapper mapper) {
-        this.repository = repository;
+    public FightService(FightRepository fightRepository, EventRepository eventRepository, FighterRepository fighterRepository, FightMapper mapper) {
+        this.fightRepository = fightRepository;
+        this.eventRepository = eventRepository;
+        this.fighterRepository = fighterRepository;
         this.mapper = mapper;
     }
 
-    public FightDTO save(FightDTO fightDTO) {
-        FightModel newFight = mapper.map(fightDTO);
-        FightModel savedFight = this.repository.save(newFight);
+    public FightDTO save(CreateFightDTO createFightDTO) {
+        EventModel event = this.eventRepository.findById(createFightDTO.eventId())
+                .orElseThrow(() -> new IllegalArgumentException("Event not found"));
+        FighterModel fighterRed = this.fighterRepository.findById(createFightDTO.fighterRedCornerId())
+                .orElseThrow(() -> new IllegalArgumentException("Fighter not found"));
+        FighterModel fighterBlue = this.fighterRepository.findById(createFightDTO.fighterBlueCornerId())
+                .orElseThrow(() -> new IllegalArgumentException("Fighter not found"));
+
+        FightModel newFight = new FightModel();
+        newFight.setEvent(event);
+        newFight.setFighterRedCorner(fighterRed);
+        newFight.setFighterBlueCorner(fighterBlue);
+
+        FightModel savedFight = this.fightRepository.save(newFight);
         return mapper.map(savedFight);
     }
 
     public List<FightDTO> listAll() {
-        return this.repository.findAll()
+        return this.fightRepository.findAll()
                 .stream()
                 .map(mapper::map)
                 .toList();
     }
 
-    public FightDTO listById(Long id) {
-        Optional<FightModel> fightFound = this.repository.findById(id);
-        return fightFound.map(mapper::map).orElse(null);
+    public Optional<FightDTO> listById(Long id) {
+        return this.fightRepository.findById(id)
+                .map(mapper::map);
     }
 
     public void delete(Long id) {
-        this.repository.deleteById(id);
+        this.fightRepository.deleteById(id);
     }
 
     public FightDTO update(Long id, FightDTO newFight) {
-        return this.repository.findById(id)
+        return this.fightRepository.findById(id)
                 .map(fight -> {
-                    fight.setEvent(newFight.event());
-                    fight.setFighterRedCorner(newFight.fighterRedCorner());
-                    fight.setFighterBlueCorner(newFight.fighterBlueCorner());
-                    fight.setFighterWinner(newFight.fighterWinner());
-                    fight.setMethodWin(newFight.methodWin());
-                    fight.setRoundFinal(newFight.roundFinal());
-                    fight.setTimeFinal(newFight.timeFinal());
-                    FightModel updatedFight = this.repository.save(fight);
+                    FightModel newFightModel = mapper.map(newFight);
+                    fight.setEvent(newFightModel.getEvent());
+                    fight.setFighterRedCorner(newFightModel.getFighterRedCorner());
+                    fight.setFighterBlueCorner(newFightModel.getFighterBlueCorner());
+                    fight.setFighterWinner(newFightModel.getFighterWinner());
+                    fight.setMethodWin(newFightModel.getMethodWin());
+                    fight.setRoundFinal(newFightModel.getRoundFinal());
+                    fight.setTimeFinal(newFightModel.getTimeFinal());
+                    FightModel updatedFight = this.fightRepository.save(fight);
                     return mapper.map(updatedFight);
                 })
                 .orElseThrow(() -> {
-                    return new IllegalArgumentException("Fighter not found");
+                    return new IllegalArgumentException("Fight not found");
                 });
     }
 }

@@ -1,9 +1,16 @@
 package com.java.UfcApi.Fight;
 
+import com.java.UfcApi.Fighter.FighterMapper;
 import org.springframework.stereotype.Component;
 
 @Component
 public class FightMapper {
+
+    private final FighterMapper fighterMapper;
+
+    public FightMapper(FighterMapper fighterMapper) {
+        this.fighterMapper = fighterMapper;
+    }
 
     public FightModel map(FightDTO dto) {
         if (dto == null) {
@@ -12,9 +19,9 @@ public class FightMapper {
 
         FightModel entity = new FightModel();
         entity.setEvent(dto.event());
-        entity.setFighterRedCorner(dto.fighterRedCorner());
-        entity.setFighterBlueCorner(dto.fighterBlueCorner());
-        entity.setFighterWinner(dto.fighterWinner());
+        entity.setFighterRedCorner(fighterMapper.map(dto.fighterRedCorner()));
+        entity.setFighterBlueCorner(fighterMapper.map(dto.fighterBlueCorner()));
+        entity.setFighterWinner(fighterMapper.map(dto.fighterWinner()));
         entity.setMethodWin(dto.methodWin());
         entity.setRoundFinal(dto.roundFinal());
         entity.setTimeFinal(dto.timeFinal());
@@ -29,9 +36,9 @@ public class FightMapper {
 
         return new FightDTO(
                 entity.getEvent(),
-                entity.getFighterRedCorner(),
-                entity.getFighterBlueCorner(),
-                entity.getFighterWinner(),
+                fighterMapper.map(entity.getFighterRedCorner()),
+                fighterMapper.map(entity.getFighterBlueCorner()),
+                fighterMapper.map(entity.getFighterWinner()),
                 entity.getMethodWin(),
                 entity.getRoundFinal(),
                 entity.getTimeFinal()

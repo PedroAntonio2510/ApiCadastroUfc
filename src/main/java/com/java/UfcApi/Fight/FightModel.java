@@ -29,10 +29,10 @@ public class FightModel {
     private FighterModel fighterBlueCorner;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "winner_id", nullable = true) // Vencedor pode ser nulo (empate/no contest)
+    @JoinColumn(name = "winner_id") // Vencedor pode ser nulo (empate/no contest)
     private FighterModel fighterWinner;
 
-    @Column(name = "methodWin", nullable = false)
+    @Column(name = "methodWin")
     private String methodWin;
 
     @Column(name = "roundFinal")
