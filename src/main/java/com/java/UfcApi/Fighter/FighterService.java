@@ -42,6 +42,7 @@ public class FighterService {
     public FighterDTO update(Long id, FighterDTO fighterDTO) {
         return repository.findById(id)
                 .map(fighter -> {
+                    fighter.setId(id);
                     fighter.setName(fighterDTO.name());
                     fighter.setCpf(fighterDTO.cpf());
                     fighter.setNickname(fighterDTO.nickname());
