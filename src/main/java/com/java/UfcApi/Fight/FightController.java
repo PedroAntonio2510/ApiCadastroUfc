@@ -39,7 +39,7 @@ public class FightController {
 
     @PutMapping("/{id}")
     public ResponseEntity<String> update(@PathVariable Long id,
-                                         @RequestBody FightDTO newFight) {
+                                         @RequestBody UpdateFightDTO newFight) {
         FightDTO fight = fightService.update(id, newFight);
         return ResponseEntity.ok("Fight updated: " + fight.fighterRedCorner().name() + " x " + fight.fighterBlueCorner().name());
     }
