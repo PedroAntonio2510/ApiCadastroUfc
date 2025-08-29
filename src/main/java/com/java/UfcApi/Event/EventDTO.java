@@ -1,4 +1,14 @@
 package com.java.UfcApi.Event;
 
-public record EventDTO() {
+import com.java.UfcApi.Fight.FightDTO;
+
+import java.time.LocalDate;
+import java.util.List;
+
+public record EventDTO(
+        String name,
+        String eventType,
+        LocalDate eventDate,
+        List<FightDTO> fights
+) {
 }
