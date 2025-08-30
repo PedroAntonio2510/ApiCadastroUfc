@@ -54,6 +54,7 @@ public class FightService {
                 .map(mapper::map);
     }
 
+
     public void delete(Long id) {
         this.fightRepository.deleteById(id);
     }
@@ -68,7 +69,7 @@ public class FightService {
                     FighterModel fighterBlue = this.fighterRepository.findById(newFight.fighterBlueCornerId())
                             .orElseThrow(() -> new IllegalArgumentException("Fighter not found"));
 
-                    if (newFight.fighterWinnerId() == null) {
+                    if (newFight.fighterWinnerId() != null) {
                         FighterModel fighterWinner = this.fighterRepository.findById(newFight.fighterWinnerId())
                                 .orElseThrow(() -> new IllegalArgumentException("Fighter not found"));
                         fight.setFighterWinner(fighterWinner);

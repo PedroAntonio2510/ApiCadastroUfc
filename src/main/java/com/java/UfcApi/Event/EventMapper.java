@@ -23,10 +23,6 @@ public class EventMapper {
         eventModel.setName(dto.name());
         eventModel.setEventType(dto.eventType());
         eventModel.setEventDate(dto.eventDate());
-        eventModel.setFights(dto.fights().stream()
-                .map(fightMapper::map)
-                .toList());
-
         return eventModel;
     }
 
@@ -34,11 +30,18 @@ public class EventMapper {
         EventDTO eventDTO = new EventDTO(
                 model.getName(),
                 model.getEventType(),
-                model.getEventDate(),
-                model.getFights().stream()
-                        .map(fightMapper::map)
-                        .toList()
+                model.getEventDate()
         );
         return eventDTO;
+    }
+
+    public EventResponseDTO mapToResponse(EventModel model) {
+        EventResponseDTO eventResponseDTO = new EventResponseDTO(
+                model.getName(),
+                model.getEventType(),
+                model.getEventDate(),
+                model.getFights().stream().map(fightMapper::map).toList()
+        );
+        return eventResponseDTO;
     }
 }

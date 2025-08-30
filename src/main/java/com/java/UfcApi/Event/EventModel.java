@@ -21,10 +21,10 @@ public class EventModel {
 
     private String name;
 
-    @Column(name = "evenType", nullable = false)
+    @Column(name = "eventType", nullable = false)
     private String eventType;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<FightModel> fights;
 
@@ -60,5 +60,13 @@ public class EventModel {
 
     public void setEventDate(LocalDate eventDate) {
         this.eventDate = eventDate;
+    }
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
     }
 }

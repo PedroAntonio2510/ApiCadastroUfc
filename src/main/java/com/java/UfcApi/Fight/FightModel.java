@@ -1,5 +1,6 @@
 package com.java.UfcApi.Fight;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.java.UfcApi.Event.EventModel;
 import com.java.UfcApi.Fighter.FighterModel;
 import jakarta.persistence.*;
@@ -20,16 +21,16 @@ public class FightModel {
     @JoinColumn(name = "event_id")
     private EventModel event;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Muitas lutas podem ter o mesmo lutador 1
-    @JoinColumn(name = "fighterRed_id", nullable = false) // Define a coluna da chave estrangeira
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fighterRed_id", nullable = false)
     private FighterModel fighterRedCorner;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Muitas lutas podem ter o mesmo lutador 2
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fighterBlue_id", nullable = false)
     private FighterModel fighterBlueCorner;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "winner_id") // Vencedor pode ser nulo (empate/no contest)
+    @JoinColumn(name = "winner_id")
     private FighterModel fighterWinner;
 
     @Column(name = "methodWin")
